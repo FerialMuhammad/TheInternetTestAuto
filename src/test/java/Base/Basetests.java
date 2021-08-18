@@ -1,6 +1,7 @@
 package Base;
 
 import com.google.common.io.Files;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,8 +25,10 @@ public class Basetests {
     protected HomePage homePage;
     @BeforeClass
     public void setUp(){
-       System.setProperty("webdriver.chrome.driver" , "resources/chromedriver.exe");
-       driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+        WebDriverManager.chromedriver().setup();
+        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+        //System.setProperty("webdriver.chrome.driver" , "resources/chromedriver.exe");
+       //driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
        driver.register(new EventReporter());
        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         //driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
